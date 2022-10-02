@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
+import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component'
-import { ProductModule } from './products/product.module'
-import { ProductsComponent } from './products/products.component'
+import { ProductsModule } from './products/modules/products.module'
+import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './header/header.component'
 
 @NgModule({
-  declarations: [AppComponent, ProductsComponent],
-  imports: [BrowserModule, FormsModule, ProductModule],
+  declarations: [AppComponent, HeaderComponent],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ProductsModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })

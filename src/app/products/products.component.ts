@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { Product } from './models/product.model'
 import { ProductService } from './product.service'
 
 @Component({
@@ -6,6 +7,12 @@ import { ProductService } from './product.service'
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+  products: Product[]
   constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.products = this.productService.getProductsLimit(10)
+    console.log(this.products)
+  }
 }

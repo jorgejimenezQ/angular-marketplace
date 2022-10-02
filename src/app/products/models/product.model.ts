@@ -1,4 +1,4 @@
-import { Condition } from '../shared/condition.enum'
+import { Condition } from '../../shared/condition.enum'
 
 export class Product {
   constructor(

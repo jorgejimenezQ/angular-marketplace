@@ -1,32 +1,45 @@
 import { Injectable } from '@angular/core'
+import { Subject } from 'rxjs'
 import { Condition } from '../shared/condition.enum'
-import { Product } from './product.model'
+import { Product } from './models/product.model'
 import data from './sample-data.json'
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
+  private productChanged: Subject<Product[]> = new Subject<Product[]>()
+
   private products: Product[] = []
 
   constructor() {
+    let i = 0
     for (let product of data) {
-      const images: string[] = [...product.images]
+      const images: string[] = ['https://source.unsplash.com/random/200x200?sig=' + i]
       this.products.push(
         new Product(
           product.name,
           product.description,
-          +product.price,
+          +product.price.substring(1),
           product.owner,
           product.itemNumber,
           images,
           product.isSold,
-          Condition[product.condition],
+          Condition[product.condition.replace(/\s/g, '')],
           product.category
         )
       )
+      i++
     }
   }
 
-  public getProducts() {
+  public getAllProducts() {
     return this.products.slice()
+  }
+
+  /**
+   *
+   */
+  public getProductsLimit(limit: number) {
+    if (limit >= this.products.length || !limit) return this.getAllProducts()
+    return this.products.slice(undefined, limit)
   }
 }
