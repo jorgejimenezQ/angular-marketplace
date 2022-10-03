@@ -10,7 +10,9 @@ import { UserService } from '../user/user.service'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  // Flag that checks for authenticated user
   isAuthenticated: boolean
+  // A Subscription we can user to unsubscribe
   userSubscription: Subscription
   constructor(
     private router: Router,
@@ -19,6 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Subscribe to the user
     this.userSubscription = this.userService.getUserSubject().subscribe((user) => {
       this.isAuthenticated = user !== null
     })
@@ -28,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSubscription.unsubscribe()
   }
 
+  //
   onAuthenticate(create: boolean) {
     if (create) {
       this.router.navigate(['authenticate', 'create'])
