@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-12 mb-2">
       <h2>
         {{ isCreating ? 'Register' : 'Log In' }}
@@ -10,7 +10,12 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-    <form class="col-12" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+    <form
+      class="col-12 col-md-6"
+      #authForm="ngForm"
+      (ngSubmit)="onSubmit(authForm)"
+      *ngIf="!isLoading"
+    >
       <div
         class="alert alert-danger"
         role="alert"
