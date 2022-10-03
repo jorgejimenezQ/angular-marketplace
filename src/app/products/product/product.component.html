@@ -1,5 +1,5 @@
-<div class="card h-100 mb-2 border shadow position-relative">
-  <app-image-bubble [image]="getUserImage()"></app-image-bubble>
+<div class="card h-100 mb-4 border shadow position-relative">
+  <app-image-bubble [image]="getUserImage()" [username]="product.owner"></app-image-bubble>
   <app-message-icon></app-message-icon>
   <img src="{{ product.images[0] }}" class="card-img-top" alt="..." />
   <a class="stretched-link" [routerLink]="['/']"></a>

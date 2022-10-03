@@ -5,12 +5,20 @@ import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component'
 import { ProductsModule } from './products/modules/products.module'
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared/shared.module'
 import { HeaderComponent } from './header/header.component'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ProductsModule, SharedModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ProductsModule,
+    SharedModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

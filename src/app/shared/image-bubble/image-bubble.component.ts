@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core'
 })
 export class ImageBubbleComponent implements OnInit {
   @Input() image: string
+  @Input() username: string
 
   constructor() {}
 
