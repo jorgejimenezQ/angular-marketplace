@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { NgForm } from '@angular/forms'
-import { ActivatedRoute, Params, Route } from '@angular/router'
+import { ActivatedRoute, Params, Route, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { AuthService } from './auth.service'
 import { IAuthResponse } from './auth-response.interface'
@@ -13,8 +13,13 @@ import { IAuthResponse } from './auth-response.interface'
 export class AuthComponent implements OnInit {
   isCreating: boolean
   isLoading: boolean = false
+  error: string = null
 
-  constructor(private route: ActivatedRoute, private authService: AuthService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
@@ -30,7 +35,10 @@ export class AuthComponent implements OnInit {
   onSubmit(form: NgForm) {
     let authObservable: Observable<IAuthResponse>
     this.isLoading = true
-    if (form.invalid) return
+    if (form.invalid) {
+      this.isLoading = false
+      return
+    }
 
     let username = form.value.username ? form.value.username : null
     const email = form.value.email
@@ -45,11 +53,11 @@ export class AuthComponent implements OnInit {
     authObservable.subscribe({
       next: (res) => {
         this.isLoading = false
-        console.log(res)
+        this.router.navigate(['/products'])
       },
       error: (e) => {
+        this.error = e
         this.isLoading = false
-        console.log(e)
       },
     })
     form.reset()

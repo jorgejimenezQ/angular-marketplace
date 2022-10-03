@@ -1,12 +1,12 @@
-<div class="card h-100 mb-4 border shadow position-relative">
+<div class="card h-100 mb-md border shadow position-relative">
   <app-image-bubble [image]="getUserImage()" [username]="product.owner"></app-image-bubble>
   <app-message-icon></app-message-icon>
   <img src="{{ product.images[0] }}" class="card-img-top" alt="..." />
   <a class="stretched-link" [routerLink]="['/']"></a>
   <div class="card-body">
-    <div class="row">
-      <p class="card-title col-6 fw-bolder text-secondary">{{ product.name }}</p>
-      <h5 class="fw-bolder f-size-2 col-6 text-end text-success">${{ product.price }}</h5>
+    <div class="row flex-column">
+      <h5 class="fw-bolder f-size-2 col-6 text-start text-success w-100">${{ product.price }}</h5>
+      <p class="card-title col-6 fw-bolder text-secondary w-100">{{ product.name }}</p>
     </div>
     <p class="card-text text-truncate">{{ product.description }}</p>
   </div>
