@@ -99,15 +99,14 @@ export class AuthService {
 
     const bearer = `Bearer ${this.userService.getUser().token}`
 
-    // Remove from the subject before sending request
-    this.userService.removeUser()
-
     // Create the request and return an observable
     return this.http
       .post(url, null, { headers: new HttpHeaders({ Authorization: bearer }) })
       .pipe(catchError(this.handleError))
   }
-
+  /*************************************** */
+  /**        H E L P E R S                 */
+  /*************************************** */
   private handleError(errorResponse: HttpErrorResponse) {
     return throwError(() => new Error(errorResponse.message))
   }

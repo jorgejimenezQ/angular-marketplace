@@ -1,0 +1,25 @@
+<div class="container">
+  <form class="row justify-content-center">
+    <div class="col-12 col-md-8 mb-xl">
+      <label for="productSearch" class="visually-hidden">Password</label>
+      <input
+        type="text"
+        class="form-control rounded-0"
+        id="productSearch"
+        placeholder="Search Products"
+      />
+    </div>
+    <div class="col-12 col-md-auto">
+      <button type="submit" class="btn btn-primary mb-3 w-100">Search</button>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <div class="row">
+    <app-product
+      class="col-6 col-md-4 col-lg-3 mb-3 position-relative image-container"
+      *ngFor="let prod of products"
+      [product]="prod"
+    ></app-product>
+  </div>
+</div>

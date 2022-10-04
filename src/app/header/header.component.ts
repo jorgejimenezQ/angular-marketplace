@@ -44,7 +44,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout().subscribe({
       next: (res) => {
-        console.log(res)
+        // Remove from the subject before sending request
+        this.userService.removeUser()
+        // console.log(res)
       },
       error: (e) => {
         console.log(e)
@@ -52,5 +54,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     })
 
     this.router.navigate(['/products'])
+  }
+
+  onSell() {
+    if (this.userService.isUserAuthenticated()) this.router.navigate(['sell'])
+    else this.router.navigate(['authenticate'])
   }
 }
