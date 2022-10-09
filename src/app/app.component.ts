@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {
     this.authService.authOnRefresh()
-    this.router.navigate(['/products'])
+    // this.router.navigate(['/products/list'])
   }
 }

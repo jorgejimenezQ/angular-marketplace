@@ -6,7 +6,7 @@ import { BehaviorSubject, catchError, tap, throwError } from 'rxjs'
 import { User } from '../user/user.model'
 import { IAuthResponse } from './auth-response.interface'
 import { UserService } from '../user/user.service'
-import { ImageService } from '../shared/helper/image.serivce'
+import { ImageService } from '../shared/helper/image.service'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -47,7 +47,8 @@ export class AuthService {
   login(email: string, password: string) {
     const url = 'https://jorge-marketplace-api.herokuapp.com/users/login'
     // const url = 'http://localhost:3000/users'
-    console.log(email, password)
+
+    // console.log(email, password)
     // Call the rest API to authenticate the user
     return this.http
       .post<IAuthResponse>(url, {
@@ -77,7 +78,7 @@ export class AuthService {
     const userData = JSON.parse(localStorage.getItem('user'))
     if (!userData || !userData._token) return
 
-    console.log('there was user : ', userData)
+    // console.log('there was user : ', userData)
     // If there was any data set the user
     this.userService.setUser(
       new User(

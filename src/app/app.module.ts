@@ -8,6 +8,8 @@ import { ProductsModule } from './products/modules/products.module'
 import { SharedModule } from './shared/shared.module'
 import { HeaderComponent } from './header/header.component'
 import { HttpClientModule } from '@angular/common/http'
+import { UserModule } from './user/modules/user.module'
+import { MessageModule } from './messages/modules/messages.module'
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -18,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http'
     AppRoutingModule,
     ProductsModule,
     SharedModule,
+    UserModule,
+    MessageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

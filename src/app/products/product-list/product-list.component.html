@@ -1,6 +1,6 @@
 <div class="container">
   <form class="row justify-content-center">
-    <div class="col-12 col-md-8 mb-xl">
+    <div class="col-12 col-md-8 mb-md">
       <label for="productSearch" class="visually-hidden">Password</label>
       <input
         type="text"
@@ -15,11 +15,12 @@
   </form>
 </div>
 <div class="container">
-  <div class="row">
+  <div data-masonry='{"percentPosition": true}' class="row">
     <app-product
-      class="col-6 col-md-4 col-lg-3 mb-3 position-relative image-container"
+      class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 position-relative image-container"
       *ngFor="let prod of products"
       [product]="prod"
+      [userImage]="getUserImage(prod.user.username)"
     ></app-product>
   </div>
 </div>

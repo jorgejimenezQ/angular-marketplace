@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <img class="img-fluid" src="{{ product.images[0] }}" alt="{{ product.name }}" />
+      <div class="row">
+        <div class="col-12">
+          <p class="text-secondary mb-lg">Sold by: {{ product.owner }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-xl">
+      <h1 class="">{{ product.name }}</h1>
+      <p class="text-success fw-bolder mb-md">${{ product.price }}</p>
+      <p class="mb-md">{{ product.description }}</p>
+      <button class="btn btn-primary w-100 mb-sm" (click)="onMakeOffer()">Make an Offer</button>
+      <button class="btn btn-secondary w-100" (click)="onSendMessage()">Send Message</button>
+    </div>
+  </div>
+
+  <hr />
+  <div class="container">
+    <div data-masonry='{"percentPosition": true}' class="row mg-lg">
+      <div class="col-12 position-relative mb-md">
+        <h2>
+          Other Products From
+          <a [routerLink]="['/user', product.owner]">
+            <span class="text-primary">{{ product.owner }}</span>
+          </a>
+        </h2>
+        <!-- <app-image-bubble
+        class="position-absolute top-0 end-0"
+        [username]="product.owner"
+        [image]="getUserImage(product.owner)"
+      ></app-image-bubble> -->
+      </div>
+      <app-product
+        class="col-12 col-md-4 col-lg-3 mb-md position-relative image-container"
+        *ngFor="let prod of userProducts"
+        [product]="prod"
+        [userImage]="getUserImage(product.username)"
+        [displayUserImage]="false"
+      ></app-product>
+    </div>
+  </div>
+</div>

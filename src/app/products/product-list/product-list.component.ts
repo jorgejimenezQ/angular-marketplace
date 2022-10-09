@@ -1,19 +1,35 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Subscription } from 'rxjs'
+import { ImageService } from 'src/app/shared/helper/image.service'
+import { UserService } from 'src/app/user/user.service'
 import { Product } from '../models/product.model'
-import { ProductService } from '../product.service'
+import { ProductService } from '../services/product.service'
 
 @Component({
   selector: 'app-product-list',
-  templateUrl: 'product-list.component.html',
-  styleUrls: ['product-list.component.scss'],
+  templateUrl: './product-list.component.html',
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
+  productsSubscription: Subscription
   products: Product[]
-  constructor(private productService: ProductService) {}
+
+  constructor(private productService: ProductService, private imageService: ImageService) {}
 
   ngOnInit(): void {
-    console.log(this.products)
-    this.products = this.productService.getProductsLimit(10)
-    console.log(this.products)
+    console.log('Product List Component has been created')
+    this.productsSubscription = this.productService.productChanged.subscribe(
+      (products: Product[]) => {
+        this.products = products
+      }
+    )
+    this.products = this.productService.getAllProducts()
+  }
+
+  ngOnDestroy(): void {
+    this.productsSubscription.unsubscribe()
+  }
+  // Get the avatar image for the owner of the product
+  getUserImage(username: string) {
+    return this.imageService.getProductOwnerImage(username)
   }
 }

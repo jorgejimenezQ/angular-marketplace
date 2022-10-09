@@ -1,8 +1,12 @@
-<div class="card h-100 mb-md border shadow position-relative">
-  <app-image-bubble [image]="getUserImage()" [username]="product.owner"></app-image-bubble>
-  <app-message-icon></app-message-icon>
-  <img src="{{ product.images[0] }}" class="card-img-top" alt="..." />
-  <a class="stretched-link" [routerLink]="['/']"></a>
+<div class="card mb-md border shadow position-relative">
+  <app-image-bubble
+    [image]="userImage"
+    [username]="product.owner"
+    *ngIf="displayUserImage"
+  ></app-image-bubble>
+  <!-- <app-message-icon></app-message-icon> -->
+  <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.name }}" />
+  <a class="stretched-link" [routerLink]="['/products/details', product.itemNumber]"></a>
   <div class="card-body">
     <div class="row flex-column">
       <h5 class="fw-bolder f-size-2 col-6 text-start text-success w-100">${{ product.price }}</h5>

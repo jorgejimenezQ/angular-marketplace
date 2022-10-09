@@ -53,7 +53,7 @@ export class AuthComponent implements OnInit {
     authObservable.subscribe({
       next: (res) => {
         this.isLoading = false
-        this.router.navigate(['/products'])
+        this.router.navigate(['/products/list'])
       },
       error: (e) => {
         this.error = e

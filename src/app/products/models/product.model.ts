@@ -1,6 +1,7 @@
 import { Condition } from '../../shared/condition.enum'
 
 export class Product {
+  public user: { username: string; image: string } | undefined
   constructor(
     public name: string,
     public description: string,

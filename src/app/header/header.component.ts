@@ -10,6 +10,8 @@ import { UserService } from '../user/user.service'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  // The user's image
+  userImage: string = null
   // Flag that checks for authenticated user
   isAuthenticated: boolean
   // A Subscription we can user to unsubscribe
@@ -24,6 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // Subscribe to the user
     this.userSubscription = this.userService.getUserSubject().subscribe((user) => {
       this.isAuthenticated = user !== null
+      // If we are authenticated update image
+      if (this.isAuthenticated) this.userImage = user.image
     })
   }
 
@@ -46,18 +50,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       next: (res) => {
         // Remove from the subject before sending request
         this.userService.removeUser()
-        // console.log(res)
+        this.router.navigate(['/products/list'])
       },
       error: (e) => {
         console.log(e)
       },
     })
-
-    this.router.navigate(['/products'])
   }
 
   onSell() {
-    if (this.userService.isUserAuthenticated()) this.router.navigate(['sell'])
+    if (this.userService.isUserAuthenticated()) this.router.navigate(['products/sell'])
     else this.router.navigate(['authenticate'])
   }
 }

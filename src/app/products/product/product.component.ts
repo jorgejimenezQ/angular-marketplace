@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Product } from '../models/product.model'
 
 @Component({
@@ -6,12 +6,10 @@ import { Product } from '../models/product.model'
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
   @Input() product: Product
+  @Input() userImage: string
+  @Input() displayUserImage: boolean = true
 
-  getUserImage() {
-    const seed = this.product.name.split(' ')[0]
-    let image = `https://avatars.dicebear.com/api/avataaars/${seed}.svg`
-    return image
-  }
+  ngOnInit(): void {}
 }
