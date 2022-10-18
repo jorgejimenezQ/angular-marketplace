@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean
   // A Subscription we can user to unsubscribe
   userSubscription: Subscription
+  username: string
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -27,7 +29,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSubscription = this.userService.getUserSubject().subscribe((user) => {
       this.isAuthenticated = user !== null
       // If we are authenticated update image
-      if (this.isAuthenticated) this.userImage = user.image
+      if (this.isAuthenticated) {
+        this.username = user.username
+        this.userImage = user.image
+      }
     })
   }
 

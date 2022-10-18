@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Subject } from 'rxjs'
+import { Product } from '../products/models/product.model'
 import { User } from './user.model'
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   // An observer for the user. Using a BehaviorSubject here so we can access current value
   user = new BehaviorSubject<User>(null)
+  products: Product[] = []
+  productsChanged: Subject<Product[]> = new Subject<Product[]>()
 
   /**
    * Returns the subject and allows the caller to subscribe to it
@@ -43,5 +46,25 @@ export class UserService {
     this.user.next(user)
     // save the user to storage
     localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  /**
+   * Sets the current user's products to the products passed in.
+   *
+   * @param products {Product[]} The products to set the user's products to
+   *
+   */
+  updateUserProducts(products: Product[]) {
+    this.products = products.slice()
+    this.productsChanged.next(this.products.slice())
+  }
+
+  /**
+   * Get the list of products for the current user.
+   *
+   * @returns {Product[]} The list of products for the current user
+   */
+  getUserProducts(): Product[] {
+    return this.products.slice()
   }
 }

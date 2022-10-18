@@ -1,16 +1,33 @@
 <div class="container">
-  <form class="row justify-content-center">
+  <div class="col-12 mb-md">
+    <h1>Browse Products</h1>
+  </div>
+  <form
+    class="row justify-content-center"
+    #searchForm="ngForm"
+    (ngSubmit)="submit(searchForm)"
+    hidden
+  >
     <div class="col-12 col-md-8 mb-md">
       <label for="productSearch" class="visually-hidden">Password</label>
       <input
         type="text"
         class="form-control rounded-0"
         id="productSearch"
-        placeholder="Search Products"
+        placeholder="Type to search..."
+        list="productSearchList"
+        ngModel
+        name="search"
+        required="true"
       />
+      <datalist id="productSearchList">
+        <option *ngFor="let product of products" [value]="product.name"></option>
+      </datalist>
     </div>
     <div class="col-12 col-md-auto">
-      <button type="submit" class="btn btn-primary mb-3 w-100">Search</button>
+      <button type="submit" class="btn btn-primary mb-3 w-100" [disabled]="searchForm.invalid">
+        Search
+      </button>
     </div>
   </form>
 </div>

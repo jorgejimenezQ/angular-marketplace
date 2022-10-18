@@ -5,8 +5,25 @@
     *ngIf="displayUserImage"
   ></app-image-bubble>
   <!-- <app-message-icon></app-message-icon> -->
-  <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.name }}" />
-  <a class="stretched-link" [routerLink]="['/products/details', product.itemNumber]"></a>
+  <img
+    src="{{ product.images[0] }}"
+    class="card-img-top"
+    alt="{{ product.name }}"
+    *ngIf="!noImage"
+    height="200px"
+    loading="lazy"
+  />
+  <a
+    class="stretched-link"
+    [routerLink]="routerPath ? routerPath : ['/products/details', product.itemNumber]"
+  ></a>
+  <span
+    class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger"
+    *ngIf="messageCount >= 0 && showMessageCount"
+  >
+    {{ messageCount }} messages
+    <span class="visually-hidden">unread messages</span>
+  </span>
   <div class="card-body">
     <div class="row flex-column">
       <h5 class="fw-bolder f-size-2 col-6 text-start text-success w-100">${{ product.price }}</h5>

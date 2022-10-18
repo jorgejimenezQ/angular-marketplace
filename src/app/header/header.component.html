@@ -3,57 +3,44 @@
     <a class="navbar-brand" [routerLink]="['/']"
       ><img src="/assets/img/logo-2.png" alt="" width="150"
     /></a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item">
-          <button
-            class="btn btn-outline-success fw-bolder me-md"
-            type="button"
-            (click)="onSell()"
-            type="button"
-          >
-            Sell
-          </button>
-        </li>
-        <li class="nav-item" *ngIf="!isAuthenticated">
-          <a
-            class="nav-link"
-            aria-current="page"
-            [routerLink]="['/authenticate']"
-            [queryParams]="{ create: true }"
-            >Sign Up</a
-          >
-        </li>
+    <ul class="nav mb-2 mb-lg-0 align-items-center">
+      <li class="nav-item px-3">
+        <button
+          class="btn btn-success text-white fw-bolder me-md w-100"
+          type="button"
+          (click)="onSell()"
+          type="button"
+        >
+          Sell
+        </button>
+      </li>
+      <li class="nav-item" *ngIf="!isAuthenticated">
+        <a
+          class="nav-link"
+          aria-current="page"
+          [routerLink]="['/authenticate']"
+          [queryParams]="{ create: true }"
+          >Sign Up</a
+        >
+      </li>
 
-        <li class="nav-item" *ngIf="!isAuthenticated">
-          <a
-            class="nav-link"
-            type="button"
-            [routerLink]="['/authenticate']"
-            [queryParams]="{ logout: true }"
-            >Log In</a
-          >
-        </li>
-        <li class="nav-item" *ngIf="isAuthenticated">
-          <a class="nav-link" type="button" (click)="onLogout()">Log Out</a>
-        </li>
-        <li class="nav-item" *ngIf="isAuthenticated">
-          <a class="nav-link" type="button" [routerLink]="['user']">
-            <i class="nav-link bi bi-person-circle profile"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
+      <li class="nav-item" *ngIf="!isAuthenticated">
+        <a
+          class="nav-link"
+          type="button"
+          [routerLink]="['/authenticate']"
+          [queryParams]="{ logout: true }"
+          >Log In</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a class="nav-link" type="button" (click)="onLogout()">Log Out</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a class="nav-link" type="button" [routerLink]="['profile']">
+          <i class="nav-link bi bi-person-circle profile"></i>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

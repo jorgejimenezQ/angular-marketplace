@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { NgForm } from '@angular/forms'
 import { ActivatedRoute, Params, Route, Router } from '@angular/router'
-import { Observable } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { AuthService } from './auth.service'
 import { IAuthResponse } from './auth-response.interface'
 
@@ -56,7 +56,9 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/products/list'])
       },
       error: (e) => {
-        this.error = e
+        console.log(e)
+        this.error = e.error.error
+        console.log(this.error)
         this.isLoading = false
       },
     })

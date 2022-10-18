@@ -62,11 +62,23 @@ export class ProductService {
   /**
    * Get the product with the given item number.
    * @param itemNumber {string} - The item number of the product
-   * @returns {Product} - The product with the given item number
+   * @returns {Product} - The product with the given item number or null if not found
    */
   public getProduct(itemNumber: string): Product {
     const product = this.products.find((product) => product.itemNumber === itemNumber)
-    if (!product) throw new Error('Product not found')
+    if (!product) null
     return product
+  }
+
+  /**
+   * Add a list of products to the current list of products.
+   * @param products {Product[]} - The list of products to add
+   */
+  public addProducts(products: Product[]) {
+    for (let product of products) {
+      if (this.products.find((p) => p.itemNumber === product.itemNumber)) continue
+      this.products.push(product)
+    }
+    this.productChanged.next(this.getAllProducts())
   }
 }

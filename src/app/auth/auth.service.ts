@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { BehaviorSubject, catchError, tap, throwError } from 'rxjs'
+import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs'
 import { User } from '../user/user.model'
 import { IAuthResponse } from './auth-response.interface'
 import { UserService } from '../user/user.service'
@@ -10,6 +10,8 @@ import { ImageService } from '../shared/helper/image.service'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  error: Subject<string> = new Subject<string>()
+
   constructor(
     private userService: UserService,
     private http: HttpClient,
@@ -28,7 +30,6 @@ export class AuthService {
         password,
       })
       .pipe(
-        catchError(this.handleError),
         tap((res) => {
           console.log(res)
           this.userService.setUser(
@@ -109,6 +110,7 @@ export class AuthService {
   /**        H E L P E R S                 */
   /*************************************** */
   private handleError(errorResponse: HttpErrorResponse) {
-    return throwError(() => new Error(errorResponse.message))
+    // this.error.next(errorResponse.error.error)
+    return throwError(() => new Error(errorResponse.error.error))
   }
 }

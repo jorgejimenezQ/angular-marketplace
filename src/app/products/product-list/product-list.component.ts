@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { NgForm } from '@angular/forms'
 import { Subscription } from 'rxjs'
 import { ImageService } from 'src/app/shared/helper/image.service'
 import { UserService } from 'src/app/user/user.service'
@@ -16,12 +17,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService, private imageService: ImageService) {}
 
   ngOnInit(): void {
-    console.log('Product List Component has been created')
     this.productsSubscription = this.productService.productChanged.subscribe(
       (products: Product[]) => {
         this.products = products
       }
     )
+
     this.products = this.productService.getAllProducts()
   }
 
@@ -31,5 +32,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   // Get the avatar image for the owner of the product
   getUserImage(username: string) {
     return this.imageService.getProductOwnerImage(username)
+  }
+
+  submit(searchForm: NgForm) {
+    console.log(searchForm.value.search)
   }
 }

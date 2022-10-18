@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="col-12 col-md-6">
+    <div class="row">
+      <div class="col-3">
+        <img src="{{ product.images[0] }}" alt="" width="70px" />
+      </div>
+      <div class="col-9">
+        <h5 class="fw-bold">{{ otherUser }}</h5>
+        <p>{{ product.name }}</p>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-3"></div>
+    </div>
+    <hr />
+    <div class="row p-3 msg-container border">
+      <div class="col-12" *ngFor="let msg of messages">
+        <div class="row" [ngClass]="{ 'justify-content-end': msg.owner.username !== otherUser }">
+          <div
+            class="col-8 position-relative border border-2 rounded mb-md text-break"
+            [ngClass]="{
+              'border-primary': msg.owner.username !== otherUser,
+              'border-secondary': msg.owner.username === otherUser
+            }"
+          >
+            <p>{{ msg.message }}</p>
+            <small class="text-muted time-date">{{ msg.dateCreated | date: 'fullDate' }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <form #msgForm="ngForm" (ngSubmit)="onSubmit(msgForm)">
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            placeholder="Reply"
+            id="message"
+            ngModel
+            name="message"
+            required
+          ></textarea>
+          <label for="replyMessage">Write your message</label>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

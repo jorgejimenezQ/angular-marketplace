@@ -79,8 +79,14 @@ export class ImageService {
 
     return this.savedUsers[username]
   }
+
   getProductImage() {
     const seed = Math.ceil(Math.random() * 28)
+    const image = 'assets/products/' + seed + '.jpg'
+    return image
+  }
+
+  getProductImageSeed(seed: string) {
     const image = 'assets/products/' + seed + '.jpg'
     return image
   }

@@ -1,1 +1,85 @@
-<p>sell works!</p>
+<!-- Create a form that saves a product -->
+<div class="container">
+  <div class="col-12 col-md-6 mb-md">
+    <h5>Sell Your Items</h5>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <form #productForm="ngForm" (ngSubmit)="submit(productForm)">
+        <div class="mb-3">
+          <label for="name" class="form-label">The name of your product</label>
+          <input type="text" class="form-control" id="name" ngModel name="name" required />
+        </div>
+        <div class="col-4 mb-3">
+          <label for="price" class="form-label">How much? </label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            data-type="currency"
+            placeholder="$99.99"
+            ngModel
+            name="price"
+            required
+            min="1"
+            step="any"
+          />
+        </div>
+        <div class="col-12 mb-sm">
+          <select
+            class="form-select"
+            aria-label="choose a category"
+            ngModel
+            name="category"
+            required
+          >
+            <option ngValue="Choose a category" selected disabled>Choose a category</option>
+            <option ngValue="books">Books</option>
+            <option ngValue="clothing">Clothing</option>
+            <option ngValue="electronics">Electronics &amp; Entertainment</option>
+            <option ngValue="health">Health &amp; Beauty</option>
+            <option ngValue="home">Home</option>
+            <option ngValue="purses">Purses, Jewelry &amp; Accessories</option>
+            <option ngValue="shoes">Shoes</option>
+            <option ngValue="sports">Sports &amp; Fitness</option>
+            <option ngValue="toys">Toys</option>
+            <option ngValue="vehicles">Vehicles &amp; Automotive</option>
+          </select>
+        </div>
+        <div class="col-12 mb-sm">
+          <select
+            class="form-select"
+            aria-label="choose a condition"
+            ngModel
+            name="condition"
+            required
+          >
+            <option selected disabled>Choose a Condition</option>
+            <option ngValue="brand new">Brand New</option>
+            <option ngValue="like new">Like New</option>
+            <option ngValue="very good">Very Good</option>
+            <option ngValue="good">Good</option>
+            <option ngValue="acceptable">Acceptable</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Describe your product</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            ngModel
+            name="description"
+            required
+            maxlength="250"
+          ></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+            Post Product
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

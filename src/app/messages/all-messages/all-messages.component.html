@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mb-md">
+      <h5>Read Your Messages</h5>
+    </div>
+    <div class="col-12 col-md-6" *ngFor="let m of conversations">
+      <div class="card position-relative m-2">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <h5 class="card-title">
+                <small class="text-muted">Other User:</small> {{ m.otherUser.username }}
+              </h5>
+            </div>
+            <div class="col-8 text-end">
+              <img src="{{ getProductImage(m.product.itemNumber) }}" alt="" width="120px" />
+            </div>
+
+            <p class="col-12">
+              <small class="text-muted">Click to see and post new messages</small>
+            </p>
+          </div>
+        </div>
+        <a
+          class="stretched-link"
+          [routerLink]="['/messages', m.messageGroup]"
+          [queryParams]="{ itemNumber: m.product.itemNumber }"
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>

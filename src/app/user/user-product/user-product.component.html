@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row">
+    <!-- Edit product -->
+
+    <!-- Create a form that saves a product -->
+    <div class="col-12 mb-md">
+      <h5>Edit Product</h5>
+    </div>
+    <div class="col-12 col-md-6 mb-xl">
+      <form #productForm="ngForm" (ngSubmit)="submit(productForm)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Change the name of your product</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [placeholder]="product.name"
+            ngModel
+            name="name"
+          />
+        </div>
+        <div class="col-4 mb-3">
+          <label for="price" class="form-label">Change the price? </label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            data-type="currency"
+            [placeholder]="'$' + product.price"
+            ngModel
+            name="price"
+            min="1"
+            step="any"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Change the product description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            [placeholder]="product.description"
+            ngModel
+            name="description"
+            maxlength="250"
+          ></textarea>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-6">
+              <button type="submit" class="btn btn-primary w-100" [disabled]="productForm.pristine">
+                Edit Product
+              </button>
+            </div>
+            <div class="col-6">
+              <button
+                type="button"
+                class="btn btn-secondary w-100"
+                [disabled]="productForm.untouched || productForm.pristine"
+                (click)="productForm.reset()"
+              >
+                Clear Form
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-12" *ngIf="messages.length == 0">
+      <div class="col-12">
+        <h2>There are no messages for this product...</h2>
+      </div>
+    </div>
+    <!-- Messages -->
+    <div class="col-12" *ngIf="messages.length > 0">
+      <div class="col-12">
+        <h2>Messages For This Product</h2>
+      </div>
+      <!-- Iterate over all messages -->
+      <div class="col-12 col-md-6 mb-sm" *ngFor="let m of messages">
+        <div class="card position-relative">
+          <div class="card-body">
+            <h5 class="card-title">
+              <small class="text-muted">From:</small> {{ m.owner.username }}
+            </h5>
+            <p class="card-text text-truncate">{{ m.message }}</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+          <a
+            class="stretched-link"
+            [routerLink]="['/messages', m.messageGroup._id]"
+            [queryParams]="{ itemNumber: m.product.itemNumber }"
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

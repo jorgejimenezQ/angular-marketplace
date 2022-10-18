@@ -20,10 +20,7 @@ export class ProductResolverService implements Resolve<Product[]> {
     state: RouterStateSnapshot
   ): Product[] | Observable<Product[]> | Promise<Product[]> {
     // Get all products
-    // TODO: Should we limit this one?; we should abstract the limit
-    const products = this.productService.getProductsLimit(10)
 
-    if (products.length == 0) return this.productStorageService.fetchAllProducts()
-    return products
+    return this.productStorageService.fetchAllProducts()
   }
 }
