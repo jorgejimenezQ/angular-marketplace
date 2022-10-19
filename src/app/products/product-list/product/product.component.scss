@@ -1,3 +1,13 @@
 .start-90 {
   left: 90%;
 }
+
+// Lifting effect on hover with a transition
+// Path: src/app/products/product-list/product/product.component.scss
+.card {
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+    transform: translateY(-5px);
+  }
+}

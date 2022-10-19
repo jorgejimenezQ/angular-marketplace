@@ -7,6 +7,7 @@ import { AvatarComponent } from './avatar/avatar.component'
 import { ProductComponent } from '../products/product-list/product/product.component'
 import { CommonModule } from '@angular/common'
 import { SpinnerComponent } from './spinner/spinner.component'
+import { PlaceholderComponent } from './placeholder/placeholder.component'
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SpinnerComponent } from './spinner/spinner.component'
     AvatarComponent,
     ProductComponent,
     SpinnerComponent,
+    PlaceholderComponent,
   ],
   imports: [RouterModule, CommonModule],
   exports: [
@@ -25,6 +27,7 @@ import { SpinnerComponent } from './spinner/spinner.component'
     AvatarComponent,
     ProductComponent,
     SpinnerComponent,
+    PlaceholderComponent,
   ],
 })
 export class SharedModule {}
