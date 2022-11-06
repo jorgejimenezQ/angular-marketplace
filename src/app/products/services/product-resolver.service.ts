@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import { Product } from '../models/product.model'
 import { ProductStorageService } from './product-storage.service'
 import { ProductService } from './product.service'
+import { environment } from 'src/environments/environment'
 
 /**
  * Will resolve the list of products before the product-list page is loaded
@@ -21,6 +22,6 @@ export class ProductResolverService implements Resolve<Product[]> {
   ): Product[] | Observable<Product[]> | Promise<Product[]> {
     // Get all products
 
-    return this.productStorageService.fetchAllProducts()
+    return this.productStorageService.fetchNextPage(0, 8)
   }
 }

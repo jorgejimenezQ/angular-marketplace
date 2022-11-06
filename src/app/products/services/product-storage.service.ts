@@ -14,7 +14,7 @@ export interface UserProductResponseData {
 @Injectable({ providedIn: 'root' })
 export class ProductStorageService {
   private BASE_URL = 'https://jorge-marketplace-api.herokuapp.com/'
-  private LIMIT = '50'
+  private LIMIT = '8'
 
   constructor(
     private productService: ProductService,
@@ -102,6 +102,30 @@ export class ProductStorageService {
         }),
         tap((products) => {
           this.productService.updateAllProducts(products)
+        })
+      )
+  }
+
+  /**
+   * Calls the Marketplace API with a skip and limit to fetch the next page of products.
+   */
+  fetchNextPage(skip: number, limit: number) {
+    const url = this.BASE_URL + 'products'
+
+    return this.http
+      .get<Product[]>(url, {
+        params: new HttpParams().set('skip', skip.toString()).set('limit', limit.toString()),
+      })
+      .pipe(
+        map((products) => {
+          return products.map((product) => {
+            product.images = [this.imageService.getProductImage()]
+            product.owner = product.user.username
+            return product
+          })
+        }),
+        tap((products) => {
+          this.productService.addProducts(products)
         })
       )
   }

@@ -11,3 +11,7 @@
     transform: translateY(-5px);
   }
 }
+
+img.card-img-top {
+  object-fit: cover;
+}

@@ -75,10 +75,15 @@ export class ProductService {
    * @param products {Product[]} - The list of products to add
    */
   public addProducts(products: Product[]) {
+    let isChanged: boolean = false
     for (let product of products) {
       if (this.products.find((p) => p.itemNumber === product.itemNumber)) continue
       this.products.push(product)
+      isChanged = true
     }
-    this.productChanged.next(this.getAllProducts())
+    if (isChanged) {
+      this.productChanged.next(this.getAllProducts())
+      console.log('updated the list')
+    }
   }
 }
