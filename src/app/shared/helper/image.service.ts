@@ -72,8 +72,12 @@ export class ImageService {
     if (!this.savedUsers[username]) {
       // this.savedthis.savedUserss.push(username)
       // return this.getthis.savedUsersAvatarImage(username)
-      this.savedUsers[username] =
-        this.userHasImage[Math.floor(Math.random() * this.userHasImage.length)]
+      // this.savedUsers[username] =
+      // this.userHasImage[Math.floor(Math.random() * this.userHasImage.length)]
+
+      let image = `https://avatars.dicebear.com/api/avataaars/${username}.svg`
+      this.savedUsers[username] = image
+
       return this.savedUsers[username]
     }
 

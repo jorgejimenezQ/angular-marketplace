@@ -13,11 +13,16 @@ const productsRoutes: Routes = [
   {
     path: '',
     component: ProductsComponent,
-    resolve: [ProductResolverService],
-    runGuardsAndResolvers: 'always',
+    // resolve: [ProductResolverService],
+    // runGuardsAndResolvers: 'always',
     children: [
       { path: 'list', component: ProductListComponent },
-      { path: 'sell', component: SellComponent, canActivate: [AuthGuardService] },
+      {
+        path: 'sell',
+        component: SellComponent,
+        canActivate: [AuthGuardService],
+        resolve: [ProductResolverService],
+      },
       {
         path: 'details/:itemNumber',
         component: ProductDetailsComponent,

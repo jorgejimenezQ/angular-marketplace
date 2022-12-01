@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router'
-import { Observable } from 'rxjs'
+import { Observable, tap } from 'rxjs'
 import { Product } from '../models/product.model'
 import { ProductStorageService } from './product-storage.service'
 import { ProductService } from './product.service'
@@ -22,6 +22,10 @@ export class ProductResolverService implements Resolve<Product[]> {
   ): Product[] | Observable<Product[]> | Promise<Product[]> {
     // Get all products
 
-    return this.productStorageService.fetchNextPage(0, 8)
+    return this.productStorageService.fetchNextPage(0, environment.productsPerPage).pipe(
+      tap((products) => {
+        this.productService.addProducts(products)
+      })
+    )
   }
 }

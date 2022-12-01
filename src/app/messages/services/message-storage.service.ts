@@ -7,10 +7,11 @@ import { ConversationResponse } from '../model/conversation-response.model'
 import { Message } from '../model/message.model'
 import { ItemMessagesResolver } from './item-messages-resolver.service'
 import { MessageService } from './message.service'
+import { environment } from 'src/environments/environment'
 
 @Injectable({ providedIn: 'root' })
 export class MessageStorageService {
-  private BASE_URL = 'https://jorge-marketplace-api.herokuapp.com'
+  private BASE_URL = environment.BASE_URL
 
   constructor(
     private http: HttpClient,
@@ -24,7 +25,7 @@ export class MessageStorageService {
    * @returns {ConversationResponse[]} A list of conversations.
    */
   fetchAllUserConversations() {
-    const url = `${this.BASE_URL}/messages/conversations`
+    const url = `${this.BASE_URL}messages/conversations`
 
     // Get the user token
     const bearer = `Bearer ${this.userService.getUser().token}`
@@ -42,7 +43,7 @@ export class MessageStorageService {
    * @returns {Promise<ConversationResponse[]>} A promise with the conversations.
    */
   fetchAllProductConv(itemNumber: string) {
-    const url = `${this.BASE_URL}/messages/conversations/${itemNumber}`
+    const url = `${this.BASE_URL}messages/conversations/${itemNumber}`
 
     // console.log(url)
     const bearer = `Bearer ${this.userService.getUser().token}`
@@ -57,7 +58,7 @@ export class MessageStorageService {
    * @returns {Promise<Product>} A promise with the product.
    */
   fetchProductByItemNumber(itemNumber: string) {
-    const url = `${this.BASE_URL}/products/${itemNumber}`
+    const url = `${this.BASE_URL}products/${itemNumber}`
 
     return this.http.get<Product>(url)
   }
@@ -72,7 +73,7 @@ export class MessageStorageService {
    * @returns {Promise<Message>} A promise with the message.
    */
   postMessage(recipient: string, messageBody: string, itemNumber: string) {
-    const url = `${this.BASE_URL}/messages`
+    const url = `${this.BASE_URL}messages`
 
     // Get the user token
     const bearer = `Bearer ${this.userService.getUser().token}`
@@ -91,7 +92,7 @@ export class MessageStorageService {
    * Posts a message with the message group id.
    */
   postMessageWithMessageGroupId(messageGroup: string, message: string) {
-    const url = `${this.BASE_URL}/messages/create/${messageGroup}`
+    const url = `${this.BASE_URL}messages/create/${messageGroup}`
 
     // Get the user token
     const bearer = `Bearer ${this.userService.getUser().token}`
@@ -113,7 +114,7 @@ export class MessageStorageService {
    * @returns {Promise<Message[]>} A promise with the messages.
    */
   fetchAllProductMessages(itemNumber: string) {
-    const url = `${this.BASE_URL}/messages/product/${itemNumber}`
+    const url = `${this.BASE_URL}messages/product/${itemNumber}`
     const bearer = `Bearer ${this.userService.getUser().token}`
     return this.http.get<Message[]>(url, {
       headers: new HttpHeaders({ Authorization: bearer }),
@@ -124,7 +125,7 @@ export class MessageStorageService {
    * Gets all the messages with the message group id passed in.
    */
   fetchMessagesByMessageGroupId(messageGroupId: string) {
-    const url = `${this.BASE_URL}/messages/messageGroup/${messageGroupId}`
+    const url = `${this.BASE_URL}messages/messageGroup/${messageGroupId}`
 
     // Get the user token
     const bearer = `Bearer ${this.userService.getUser().token}`
@@ -144,7 +145,7 @@ export class MessageStorageService {
    * @returns {Promise<{itemNumber: string, count: number}[]>} A promise with the number of messages per product.
    */
   getMessagesCount() {
-    const url = `${this.BASE_URL}/messages/count`
+    const url = `${this.BASE_URL}messages/count`
 
     // Get the user token
     const bearer = `Bearer ${this.userService.getUser().token}`

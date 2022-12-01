@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-
+  BASE_URL: 'https://market-api-tuc6.onrender.com/',
   productsPerPage: 8,
 }
 

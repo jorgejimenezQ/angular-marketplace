@@ -14,3 +14,6 @@ export class Product {
     public category: string
   ) {}
 }
+
+// Regex for anyting after word
+// (?<=word).*

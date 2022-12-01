@@ -31,8 +31,9 @@
     </div>
   </form>
 </div>
-<div class="container">
-  <div data-masonry='{"percentPosition": true}' class="row">
+<!-- The list of products fetched from the database -->
+<div class="container" *ngIf="!loading">
+  <div class="row">
     <app-product
       class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 position-relative image-container"
       *ngFor="let prod of products"
@@ -41,3 +42,5 @@
     ></app-product>
   </div>
 </div>
+
+<app-placeholder *ngIf="loading"></app-placeholder>

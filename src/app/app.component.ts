@@ -8,6 +8,7 @@ import {
   Router,
 } from '@angular/router'
 import { AuthService } from './auth/auth.service'
+import { ProductService } from './products/services/product.service'
 
 @Component({
   selector: 'app-root',
@@ -18,15 +19,14 @@ export class AppComponent implements OnInit {
   loading = false
   @HostListener('window:onbeforeunload', ['$event'])
   title = 'marketplace'
-  clearLocalStorage(event) {
-    localStorage.clear()
-  }
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private productService: ProductService
   ) {}
+
   ngOnInit(): void {
     this.authService.authOnRefresh()
     // this.router.navigate(['/products/list'])
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
       switch (true) {
         case event instanceof NavigationStart: {
           this.loading = true
+          this.productService.setLoading(true)
           break
         }
 
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           this.loading = false
+          this.productService.setLoading(false)
           break
         }
         default: {
@@ -49,5 +51,9 @@ export class AppComponent implements OnInit {
         }
       }
     })
+  }
+
+  clearLocalStorage(event) {
+    localStorage.clear()
   }
 }

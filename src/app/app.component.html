@@ -1,3 +1,43 @@
+<div class="container">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Thanks for checking out my Angular App!
+
+    <hr />
+
+    <details>
+      <summary>Some things to note:</summary>
+      <ul>
+        <li>
+          It is a community store for sharing, selling, and buying items. If you like a product, you
+          can message the seller to make an offer.
+        </li>
+        <li>
+          All the images are from <a href="https://unsplash.com/">Unsplash</a> and are free to use.
+          I only used a handful of them for this demo, so you may see the same image multiple times.
+        </li>
+        <li>
+          Check out the infinite scroll feature. I implemented it my self using the a HostListener.
+          I initially load 8 items and then load more every time you scroll to the bottom of the
+          page.
+        </li>
+        <li>I used Bootstrap Sass for the styling.</li>
+        <li>
+          The app uses a Nodejs backend with a MongoDB database. The backend is hosted on
+          <a href="https://www.render.com/">Render</a>
+        </li>
+      </ul>
+      <p>
+        I worked really hard on this app, so please let me know if you have any
+        <a href="https://jorgejimenezq.github.io.">feedback or questions</a>.
+        <br />
+        Take a look at the source code, if you are interested in how I built it.
+        <a href="https://github.com/jorgejimenezQ/angular-marketplace">Github</a>
+      </p>
+    </details>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+
 <app-header></app-header>
 <div class="container vh-100" *ngIf="loading">
   <div class="row justify-content-center align-item-center">

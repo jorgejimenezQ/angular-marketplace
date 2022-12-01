@@ -6,6 +6,7 @@ import { ImageService } from 'src/app/shared/helper/image.service'
 import { UserService } from 'src/app/user/user.service'
 import { Product } from '../models/product.model'
 import { ProductService } from './product.service'
+import { environment } from 'src/environments/environment'
 
 export interface UserProductResponseData {
   products: Product[]
@@ -13,7 +14,7 @@ export interface UserProductResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class ProductStorageService {
-  private BASE_URL = 'https://jorge-marketplace-api.herokuapp.com/'
+  private BASE_URL = environment.BASE_URL
   private LIMIT = '8'
 
   constructor(
@@ -123,10 +124,10 @@ export class ProductStorageService {
             product.owner = product.user.username
             return product
           })
-        }),
-        tap((products) => {
-          this.productService.addProducts(products)
         })
+        // tap((products) => {
+        //   this.productService.addProducts(products)
+        // })
       )
   }
 

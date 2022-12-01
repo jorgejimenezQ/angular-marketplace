@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs'
+import { catchError, Subject, tap, throwError } from 'rxjs'
 import { User } from '../user/user.model'
 import { IAuthResponse } from './auth-response.interface'
 import { UserService } from '../user/user.service'
 import { ImageService } from '../shared/helper/image.service'
+import { environment } from 'src/environments/environment'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,12 +16,12 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private http: HttpClient,
-    private router: Router,
     private imageService: ImageService
   ) {}
 
   signup(username: string, email: string, password: string) {
-    const url = 'https://jorge-marketplace-api.herokuapp.com/users'
+    const url = environment.BASE_URL + 'users'
+    // const url = 'https://jorge-marketplace-api.herokuapp.com/users'
     // const url = 'http://localhost:3000/users'
     // Call the rest API to authenticate the user
     return this.http
@@ -46,7 +47,8 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    const url = 'https://jorge-marketplace-api.herokuapp.com/users/login'
+    const url = environment.BASE_URL + 'users/login'
+    // const url = 'https://jorge-marketplace-api.herokuapp.com/users/login'
     // const url = 'http://localhost:3000/users'
 
     // console.log(email, password)
@@ -97,7 +99,8 @@ export class AuthService {
     // maybe in the future we can log error here
     if (this.userService.getUser() === null) return
 
-    const url = 'https://jorge-marketplace-api.herokuapp.com/users/logOutAll'
+    const url = environment.BASE_URL + 'users/logout'
+    // const url = 'https://jorge-marketplace-api.herokuapp.com/users/logOutAll'
 
     const bearer = `Bearer ${this.userService.getUser().token}`
 
