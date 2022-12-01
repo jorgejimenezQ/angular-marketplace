@@ -4,5 +4,5 @@ An online shopping website where users can post, edit, delete, and buy products.
 
 I implemented this REST API to handle the storage functionality:
 
-[Marketplace API Documentation](https://jorge-marketplace-api.herokuapp.com/api/docs)
+[Marketplace API Documentation](https://market-api-tuc6.onrender.com/api/docs)
 [Marketplace API Source Code](https://github.com/jorgejimenezQ/Marketplace-rest-api)
